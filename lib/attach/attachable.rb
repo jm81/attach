@@ -89,7 +89,16 @@ module Attach
           return false if upload.blank?
           self.__send__(fld.to_s.pluralize).each {|del_photo| del_photo.destroy}
           self.__send__("new_#{fld}=", upload)
-        end   
+        end
+        
+        # def destroy_photo_attachments=
+        # 
+        # Delete all attachments of attachment class. Called by before :destroy
+        define_method("destroy_#{fld}_attachments") do
+          self.__send__(fld.to_s.pluralize).destroy!
+        end
+        
+        self.before(:destroy, "destroy_#{fld}_attachments".to_sym)
       end
       
       def attachments(fld, klass, sizes = nil)
