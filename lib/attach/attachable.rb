@@ -56,30 +56,28 @@ module Attach
         
         # def new_photo=
         define_method("new_#{fld}=") do |upload|
-          unless upload.empty?
-            photo = klass.create( :attachable_type => self.class,
-                                  :attachable_id => self.id,
-                                  :filename => upload[:filename].split(/[\\\/]/)[-1],
-                                  :content_type => upload[:content_type],
-                                  :size => upload[:size],
-                                  :field_name => fld
-            )
-            
-            if photo.filename[-4..-1].downcase == ".pdf"
-              photo.update(:filename => photo.filename[0..-4] + "png")
-            end
-            
-            @attachments_needing_id ||= Hash.new{ |hash, key| hash[key] = Array.new }
-            @attachments_needing_id[fld.to_s] << photo unless self.id
-            
-            self.class.__send__("#{fld}_sizes").each do |style|
-              dir_path = "public/assets/#{photo.id}/#{style[0]}"
-              File.makedirs(dir_path)
-              img = Magick::Image.read(upload[:tempfile].path)
-              img[0].
-                resize_matte(style[1], style[2], style[3]).
-                write(photo.path(style[0]))
-            end
+          photo = klass.create( :attachable_type => self.class,
+                                :attachable_id => self.id,
+                                :filename => upload.original_filename.split(/[\\\/]/)[-1],
+                                :content_type => upload.content_type,
+                                :size => upload.size,
+                                :field_name => fld
+          )
+          
+          if photo.filename[-4..-1].downcase == ".pdf"
+            photo.update(:filename => photo.filename[0..-4] + "png")
+          end
+          
+          @attachments_needing_id ||= Hash.new{ |hash, key| hash[key] = Array.new }
+          @attachments_needing_id[fld.to_s] << photo unless self.id
+          
+          self.class.__send__("#{fld}_sizes").each do |style|
+            dir_path = "public/assets/#{photo.id}/#{style[0]}"
+            File.makedirs(dir_path)
+            img = Magick::Image.read(upload.path)
+            img[0].
+              resize_matte(style[1], style[2], style[3]).
+              write(photo.path(style[0]))
           end
         end
         
@@ -123,5 +121,6 @@ module Attach
       end
       @attachments_needing_id = nil
     end
+    
   end
 end
