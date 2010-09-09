@@ -13,7 +13,7 @@ module Attach
       def attachment_properties()
         klass = self
         [
-          [:id, DataMapper::Types::Serial],
+          [:id, DataMapper::Property::Serial],
           [:filename, String],
           [:content_type, String],
           [:size, Integer],
