@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jared Morgan"]
-  s.date = %q{2010-03-17}
+  s.date = %q{2010-09-09}
   s.description = %q{This is a library I've developed for attachments, because I just don't like the others I've tried.}
   s.email = %q{jmorgan@morgancreative.net}
   s.extra_rdoc_files = [
@@ -19,23 +19,26 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     "Gemfile",
+     "Gemfile.lock",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
-     "VERSION",
      "examples/attach/attachment_example.rb",
      "examples/attach/samples.rb",
      "examples/attach_example.rb",
      "examples/example_helper.rb",
+     "jm81-attach.gemspec",
      "lib/attach.rb",
      "lib/attach/attachable.rb",
      "lib/attach/attachment.rb",
+     "lib/attach/version.rb",
      "lib/extensions/resize_matte.rb"
   ]
   s.homepage = %q{http://github.com/jm81/attach}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Yet another Attachments library (for DataMapper)}
   s.test_files = [
     "examples/attach/attachment_example.rb",
@@ -48,28 +51,31 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<dm-core>, [">= 0.10.0"])
-      s.add_runtime_dependency(%q<dm-types>, [">= 0.10.0"])
-      s.add_runtime_dependency(%q<dm-timestamps>, [">= 0.10.0"])
-      s.add_runtime_dependency(%q<dm-aggregates>, [">= 0.10.0"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<dm-core>, ["~> 1.0.2"])
+      s.add_runtime_dependency(%q<dm-aggregates>, ["~> 1.0.2"])
+      s.add_runtime_dependency(%q<dm-timestamps>, ["~> 1.0.2"])
+      s.add_runtime_dependency(%q<dm-types>, ["~> 1.0.2"])
+      s.add_runtime_dependency(%q<dm-validations>, ["~> 1.0.2"])
+      s.add_development_dependency(%q<dm-migrations>, ["~> 1.0.2"])
       s.add_development_dependency(%q<micronaut>, [">= 0.3.0"])
-      s.add_runtime_dependency(%q<dm-validations>, [">= 0.10.0"])
     else
-      s.add_dependency(%q<dm-core>, [">= 0.10.0"])
-      s.add_dependency(%q<dm-types>, [">= 0.10.0"])
-      s.add_dependency(%q<dm-timestamps>, [">= 0.10.0"])
-      s.add_dependency(%q<dm-aggregates>, [">= 0.10.0"])
+      s.add_dependency(%q<dm-core>, ["~> 1.0.2"])
+      s.add_dependency(%q<dm-aggregates>, ["~> 1.0.2"])
+      s.add_dependency(%q<dm-timestamps>, ["~> 1.0.2"])
+      s.add_dependency(%q<dm-types>, ["~> 1.0.2"])
+      s.add_dependency(%q<dm-validations>, ["~> 1.0.2"])
+      s.add_dependency(%q<dm-migrations>, ["~> 1.0.2"])
       s.add_dependency(%q<micronaut>, [">= 0.3.0"])
-      s.add_dependency(%q<dm-validations>, [">= 0.10.0"])
     end
   else
-    s.add_dependency(%q<dm-core>, [">= 0.10.0"])
-    s.add_dependency(%q<dm-types>, [">= 0.10.0"])
-    s.add_dependency(%q<dm-timestamps>, [">= 0.10.0"])
-    s.add_dependency(%q<dm-aggregates>, [">= 0.10.0"])
+    s.add_dependency(%q<dm-core>, ["~> 1.0.2"])
+    s.add_dependency(%q<dm-aggregates>, ["~> 1.0.2"])
+    s.add_dependency(%q<dm-timestamps>, ["~> 1.0.2"])
+    s.add_dependency(%q<dm-types>, ["~> 1.0.2"])
+    s.add_dependency(%q<dm-validations>, ["~> 1.0.2"])
+    s.add_dependency(%q<dm-migrations>, ["~> 1.0.2"])
     s.add_dependency(%q<micronaut>, [">= 0.3.0"])
-    s.add_dependency(%q<dm-validations>, [">= 0.10.0"])
   end
 end
 
