@@ -1,14 +1,5 @@
-# DataMapper
-#
-# This is code to add to the end of paperclip's test/helper.rb to run (and pass)
-# paperclip's test suite using DataMapper.
-#
-# Add the following lines to the paperclip Gemfile:
-# gem 'dm-core',           '~> 1.0.2'
-# gem 'dm-migrations',     '~> 1.0.2'
-# gem 'dm-sqlite-adapter', '~> 1.0.2'
-# gem 'dm-types',          '~> 1.0.2'
-# gem 'dm-validations',    '~> 1.0.2'
+require 'dm-core'
+require 'dm-validations'
 
 module Binderclip
   module Orm
@@ -179,31 +170,13 @@ module Binderclip
   end
 end
 
-require 'dm-core'
-require 'dm-migrations'
-require 'dm-types'
-require 'dm-validations'
-
-DataMapper.setup(:default, 'sqlite::memory:')
-
-def rebuild_model options = {}
-  rebuild_class(options)
-end
-
-def rebuild_class options = {}
-  Object.send(:remove_const, "Dummy") rescue nil
-  Object.const_set("Dummy", Class.new())
-  Dummy.class_eval do
-    include DataMapper::Resource
-    include Binderclip::Orm::DataMapper::TestCompatibility
-
-    property :id, DataMapper::Property::Serial
-    property :other, String
-
-    has_attached_file :avatar, options
+# User DataMapper logger instead of Active Record logger
+module Paperclip
+  class << self
+    def logger #:nodoc:
+      DataMapper.logger
+    end
   end
-
-  DataMapper.auto_migrate!
 end
 
 DataMapper::Model.append_extensions(Binderclip::Orm::DataMapper::Hook)

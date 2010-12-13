@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'rake'
+require 'rake/testtask'
+require 'bundler'
+Bundler.setup(:default, :paperclip)
 require File.join(File.dirname(__FILE__), 'lib', 'attach', 'version')
 
 begin
@@ -38,7 +41,7 @@ Micronaut::RakeTask.new(:rcov) do |examples|
   examples.rcov = true
 end
 
-task :examples => :check_dependencies
+task :examples
 
 task :default => :examples
 
@@ -50,4 +53,19 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "attach #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+namespace 'test' do
+  desc 'Run paperclip tests using DataMapper. Specify path to paperclip with PAPERCLIP_PATH'
+  Rake::TestTask.new(:data_mapper) do |test|
+    ENV['PAPERCLIP_PATH'] ||= File.expand_path('../paperclip')
+    unless File.exist?(ENV['PAPERCLIP_PATH'])
+      puts "Specify the path to devise (e.g. rake test:data_mapper PAPERCLIP_PATH=/path/to/devise). Not found at #{ENV['PAPERCLIP_PATH']}"
+      exit
+    end
+    test.libs << 'lib' << 'test'
+    Dir.chdir(ENV['PAPERCLIP_PATH']) if ARGV[0] == 'test:data_mapper'
+    test.test_files = FileList["#{File.dirname(__FILE__)}/test/dm_helper.rb"] + FileList["#{ENV['PAPERCLIP_PATH']}/test/**/*_test.rb"]
+    test.verbose = true
+  end
 end
