@@ -3,14 +3,14 @@ require 'rake'
 require 'rake/testtask'
 require 'bundler'
 Bundler.setup(:default, :paperclip)
-require File.join(File.dirname(__FILE__), 'lib', 'attach', 'version')
+require File.join(File.dirname(__FILE__), 'lib', 'binderclip', 'version')
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "jm81-attach"
-    gem.version = Attach::VERSION.dup
-    gem.summary = %Q{Yet another Attachments library (for DataMapper)}
+    gem.name = "binderclip"
+    gem.version = Binderclip::VERSION.dup
+    gem.summary = %Q{Extensions for Paperclip, including DataMapper support}
     gem.description = %Q{This is a library I've developed for attachments, because I just don't like the others I've tried.}
     gem.email = "jmorgan@morgancreative.net"
     gem.homepage = "http://github.com/jm81/attach"
