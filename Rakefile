@@ -15,12 +15,12 @@ begin
     gem.email = "jmorgan@morgancreative.net"
     gem.homepage = "http://github.com/jm81/attach"
     gem.authors = ["Jared Morgan"]
-    gem.add_dependency('dm-core', '~> 1.0.2')
-    gem.add_dependency('dm-aggregates', '~> 1.0.2')
-    gem.add_dependency('dm-timestamps', '~> 1.0.2')
-    gem.add_dependency('dm-types', '~> 1.0.2')
-    gem.add_dependency('dm-validations', '~> 1.0.2')
-    gem.add_development_dependency('dm-migrations', '~> 1.0.2')
+    gem.add_dependency('dm-core', '~> 1.0')
+    gem.add_dependency('dm-aggregates', '~> 1.0')
+    gem.add_dependency('dm-timestamps', '~> 1.0')
+    gem.add_dependency('dm-types', '~> 1.0')
+    gem.add_dependency('dm-validations', '~> 1.0')
+    gem.add_development_dependency('dm-migrations', '~> 1.0')
     gem.add_development_dependency('micronaut', '>= 0.3.0')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

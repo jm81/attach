@@ -125,13 +125,13 @@ PLATFORMS
 
 DEPENDENCIES
   aws-s3
-  dm-aggregates (~> 1.0.2)
-  dm-core (~> 1.0.2)
-  dm-migrations (~> 1.0.2)
-  dm-sqlite-adapter (~> 1.0.2)
-  dm-timestamps (~> 1.0.2)
-  dm-types (~> 1.0.2)
-  dm-validations (~> 1.0.2)
+  dm-aggregates (~> 1.0)
+  dm-core (~> 1.0)
+  dm-migrations (~> 1.0)
+  dm-sqlite-adapter (~> 1.0)
+  dm-timestamps (~> 1.0)
+  dm-types (~> 1.0)
+  dm-validations (~> 1.0)
   jeweler
   micronaut (>= 0.3.0)
   mocha
