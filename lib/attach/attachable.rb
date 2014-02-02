@@ -1,4 +1,3 @@
-require 'ftools'
 require 'fileutils'
 require 'RMagick'
 
@@ -73,7 +72,7 @@ module Attach
           
           self.class.__send__("#{fld}_sizes").each do |style|
             dir_path = "public/assets/#{photo.id}/#{style[0]}"
-            File.makedirs(dir_path)
+            FileUtils.mkdir_p(dir_path)
             img = Magick::Image.read(upload.path)
             img[0].
               resize_matte(style[1], style[2], style[3]).
