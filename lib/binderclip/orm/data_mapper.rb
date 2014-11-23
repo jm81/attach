@@ -89,7 +89,7 @@ module Binderclip
           def validates_attachment_content_type name, options = {}
             validation_options = options.dup
             allowed_types = [validation_options[:content_type]].flatten
-            validates_with_block(:"#{name}_content_type", validation_options) do
+            validates_with_block(:"#{name}_content_type") do
               value = attribute_get(:"#{name}_content_type")
               if !allowed_types.any?{|t| t === value } && !(value.nil? || value.blank?)
                 message = options[:message] || "is not one of #{allowed_types.join(", ")}"
